@@ -1,0 +1,24 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SpaceInvaders.App"
+             xmlns:local="using:SpaceInvaders"
+             xmlns:converters="using:SpaceInvaders.Converters"
+             RequestedThemeVariant="Dark">
+
+    <Application.Resources>
+        <converters:AssetUriToBitmapConverter x:Key="AssetBitmap" />
+        <converters:AlienTypeToBitmapConverter x:Key="AlienBitmap" />
+        <converters:ShipIdToBitmapConverter x:Key="ShipBitmap" />
+        <converters:ProjectileOwnerToBrushConverter x:Key="ProjectileBrush" />
+        <converters:InvulnerabilityToOpacityConverter x:Key="InvulnerabilityOpacity" />
+    </Application.Resources>
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://SpaceInvaders/Styles/GameStyles.axaml" />
+    </Application.Styles>
+</Application>

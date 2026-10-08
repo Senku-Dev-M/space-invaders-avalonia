@@ -1,0 +1,165 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpaceInvaders.ViewModels"
+             xmlns:entities="using:SpaceInvaders.Models.Entities"
+             x:Class="SpaceInvaders.Views.Game.GameView"
+             x:DataType="vm:GameViewModel"
+             Focusable="True">
+    <Grid Margin="24" RowDefinitions="Auto,*,Auto">
+        <Border Grid.Row="0" Background="#000000" BorderBrush="#F4FFF4" BorderThickness="1"
+                CornerRadius="0" Padding="18,10" Margin="0,0,0,12">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto" ColumnSpacing="30">
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="PUNTAJE" Foreground="#F4FFF4" FontFamily="Consolas" FontSize="11" FontWeight="Bold" LetterSpacing="2" />
+                    <TextBlock Text="{Binding Session.Score, StringFormat={}{0:D6}}" Foreground="#FFFFFF" FontFamily="Consolas" FontSize="23" FontWeight="Bold" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="OLEADA" Foreground="#F4FFF4" FontFamily="Consolas" FontSize="11" FontWeight="Bold" LetterSpacing="2" />
+                    <TextBlock Text="{Binding Session.Wave, StringFormat={}{0:D2}}" Foreground="#FFFFFF" FontFamily="Consolas" FontSize="23" FontWeight="Bold" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="VIDAS" Foreground="#F4FFF4" FontFamily="Consolas" FontSize="11" FontWeight="Bold" LetterSpacing="2" />
+                    <ItemsControl ItemsSource="{Binding LifeIcons}" Margin="0,3,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LifeIconViewModel">
+                                <Image Source="{Binding AssetUri, Converter={StaticResource AssetBitmap}}"
+                                       Width="23" Height="23" Stretch="Uniform"
+                                       RenderOptions.BitmapInterpolationMode="None" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="9" VerticalAlignment="Center">
+                    <Button Classes="hud-icon" Command="{Binding TogglePauseCommand}" ToolTip.Tip="Pausar / Reanudar">
+                        <Image Source="{Binding PauseIconAssetUri, Converter={StaticResource AssetBitmap}}"
+                               Width="24" Height="24" RenderOptions.BitmapInterpolationMode="None" />
+                    </Button>
+                    <Button Classes="hud-icon" Command="{Binding RestartCommand}" ToolTip.Tip="Reiniciar partida">
+                        <Image Source="avares://SpaceInvaders/Assets/Images/Interface/icon-restart.png"
+                               Width="24" Height="24" RenderOptions.BitmapInterpolationMode="None" />
+                    </Button>
+                    <Button Classes="hud-icon hud-exit" Command="{Binding RequestBackToMenuCommand}" ToolTip.Tip="Abandonar partida">
+                        <Image Source="avares://SpaceInvaders/Assets/Images/Interface/icon-exit.png"
+                               Width="24" Height="24" RenderOptions.BitmapInterpolationMode="None" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Width="800" Height="600" Background="#020510" BorderBrush="#1B3655" BorderThickness="2" CornerRadius="4">
+                <Canvas Width="800" Height="600" ClipToBounds="True">
+                    <Ellipse Canvas.Left="62" Canvas.Top="56" Width="2" Height="2" Fill="#5B7194" />
+                    <Ellipse Canvas.Left="714" Canvas.Top="88" Width="3" Height="3" Fill="#304B72" />
+                    <Ellipse Canvas.Left="44" Canvas.Top="288" Width="2" Height="2" Fill="#40587D" />
+                    <Ellipse Canvas.Left="744" Canvas.Top="332" Width="2" Height="2" Fill="#5B7194" />
+                    <Ellipse Canvas.Left="280" Canvas.Top="36" Width="2" Height="2" Fill="#40587D" />
+                    <Ellipse Canvas.Left="536" Canvas.Top="212" Width="2" Height="2" Fill="#304B72" />
+                    <Border Canvas.Left="0" Canvas.Top="534" Width="800" Height="1" Background="#FF4B7166" />
+
+                    <ItemsControl Width="800" Height="600" ItemsSource="{Binding Session.ShieldBlocks}" ZIndex="2">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><Canvas Width="800" Height="600" /></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Styles>
+                            <Style Selector="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{ReflectionBinding X}" />
+                                <Setter Property="Canvas.Top" Value="{ReflectionBinding Y}" />
+                            </Style>
+                        </ItemsControl.Styles>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="entities:ShieldBlock">
+                                <Border Width="{Binding Width}" Height="{Binding Height}" Background="#64E572" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <ItemsControl Width="800" Height="600" ItemsSource="{Binding Session.Aliens}" ZIndex="3">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><Canvas Width="800" Height="600" /></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Styles>
+                            <Style Selector="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{ReflectionBinding X}" />
+                                <Setter Property="Canvas.Top" Value="{ReflectionBinding Y}" />
+                            </Style>
+                        </ItemsControl.Styles>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="entities:Alien">
+                                <Image Width="{Binding Width}" Height="{Binding Height}"
+                                       Source="{Binding Type, Converter={StaticResource AlienBitmap}}"
+                                       Stretch="Fill" RenderOptions.BitmapInterpolationMode="None" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <ItemsControl Width="800" Height="600" ItemsSource="{Binding Session.Projectiles}" ZIndex="4">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><Canvas Width="800" Height="600" /></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Styles>
+                            <Style Selector="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{ReflectionBinding X}" />
+                                <Setter Property="Canvas.Top" Value="{ReflectionBinding Y}" />
+                            </Style>
+                        </ItemsControl.Styles>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="entities:Projectile">
+                                <Border Width="{Binding Width}" Height="{Binding Height}"
+                                        Background="{Binding Owner, Converter={StaticResource ProjectileBrush}}"
+                                        CornerRadius="2" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Image Canvas.Left="{Binding Session.Player.X}"
+                           Canvas.Top="{Binding Session.Player.Y}"
+                           Width="{Binding Session.Player.Width}"
+                           Height="{Binding Session.Player.Height}"
+                           Opacity="{Binding Session.Player.IsInvulnerable, Converter={StaticResource InvulnerabilityOpacity}}"
+                           Source="{Binding Session.Player.ShipId, Converter={StaticResource ShipBitmap}}"
+                           Stretch="Fill" RenderOptions.BitmapInterpolationMode="None" ZIndex="5" />
+
+                    <Border Width="800" Height="600" Background="#020510DD" IsVisible="{Binding IsPaused}" ZIndex="8">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14">
+                            <TextBlock Text="MISIÓN EN PAUSA" Foreground="#42D9FF" FontSize="38" FontWeight="Black" />
+                            <TextBlock Text="Pulsa P o ESC para continuar" Foreground="#91A0BC" FontSize="17" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Width="800" Height="600" Background="#000000EE" IsVisible="{Binding IsExitConfirmationVisible}" ZIndex="10">
+                        <Border Classes="retro-panel" Width="500" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Spacing="16">
+                                <TextBlock Classes="retro-green" Text="* ADVERTENCIA DEL SISTEMA *" FontSize="12" HorizontalAlignment="Center" />
+                                <TextBlock Classes="retro-heading" Text="¿ABANDONAR MISIÓN?" Foreground="#FF6868"
+                                           FontSize="28" HorizontalAlignment="Center" />
+                                <TextBlock Classes="retro-heading" Text="EL PUNTAJE ACTUAL NO SE GUARDARÁ"
+                                           Foreground="#F4FFF4" FontSize="12" HorizontalAlignment="Center" />
+                                <Border Height="1" Background="#315B36" Margin="0,4" />
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                                    <Button Classes="retro-menu retro-danger" Width="205" Content="[ ABANDONAR ]"
+                                            Command="{Binding ConfirmBackToMenuCommand}" />
+                                    <Button Grid.Column="1" Classes="retro-menu retro-start" Width="205" Content="[ CONTINUAR ]"
+                                            Command="{Binding CancelBackToMenuCommand}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                </Canvas>
+            </Border>
+        </Viewbox>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="5,10,5,0">
+            <TextBlock Text="← → / A D  MOVER     •     ESPACIO  DISPARAR" Foreground="#596984" FontWeight="Bold" FontSize="12" />
+            <TextBlock Grid.Column="1" Text="UNA SOLA BALA ACTIVA" Foreground="#8BFF6A" FontWeight="Bold" FontSize="12" />
+        </Grid>
+    </Grid>
+</UserControl>

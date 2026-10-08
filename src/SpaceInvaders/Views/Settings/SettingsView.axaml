@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpaceInvaders.ViewModels"
+             xmlns:entities="using:SpaceInvaders.Models.Entities"
+             x:Class="SpaceInvaders.Views.Settings.SettingsView"
+             x:DataType="vm:SettingsViewModel"
+             Classes="retro-screen">
+    <Grid Background="#000000" Margin="52,34" RowDefinitions="Auto,*,Auto">
+        <StackPanel HorizontalAlignment="Center" Spacing="8">
+            <TextBlock Classes="retro-green" Text="== CONFIGURACIÓN ==" FontSize="15" HorizontalAlignment="Center" />
+            <TextBlock Classes="retro-heading" Text="ELIGE TU NAVE" FontSize="34" HorizontalAlignment="Center" />
+            <TextBlock Classes="retro-heading" Text="TODAS LAS NAVES TIENEN LA MISMA POTENCIA" FontSize="12" Foreground="#A8BFA8" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center" RowDefinitions="*,Auto">
+            <ListBox ItemsSource="{Binding Ships}"
+                     SelectedItem="{Binding SelectedShip}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     SelectionMode="Single"
+                     HorizontalAlignment="Center">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="22" HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="CornerRadius" Value="0" />
+                        <Setter Property="Background" Value="#000000" />
+                    </Style>
+                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#0A240D" />
+                    </Style>
+                </ListBox.Styles>
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="entities:ShipOption">
+                        <Border Width="235" Height="245" Classes="retro-panel" Padding="15">
+                            <Grid RowDefinitions="Auto,*,Auto,Auto">
+                                <TextBlock Classes="retro-heading" Text="{Binding DisplayName}" FontSize="17" HorizontalAlignment="Center" />
+                                <Border Grid.Row="1" Margin="8,14" Background="#000000" BorderBrush="#46664A" BorderThickness="1">
+                                    <Image Source="{Binding AssetUri, Converter={StaticResource AssetBitmap}}"
+                                           Width="155" Height="94" Stretch="Uniform" RenderOptions.BitmapInterpolationMode="None" />
+                                </Border>
+                                <TextBlock Grid.Row="2" Classes="retro-green" Text="LISTA" FontSize="12" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="3" Classes="retro-heading" Text="BASE LÁSER" FontSize="10" HorizontalAlignment="Center" Margin="0,7,0,0" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Grid.Row="1" Classes="retro-heading" Text="USA ← → PARA ELEGIR" FontSize="12" HorizontalAlignment="Center" Margin="0,24,0,0" />
+        </Grid>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Spacing="10">
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="#FF6868" FontFamily="Consolas" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="14">
+                <Button Classes="retro-menu retro-start" Width="255" Content="[ GUARDAR ]" Command="{Binding SaveCommand}" />
+                <Button Classes="retro-menu" Width="255" Content="[ VOLVER ]" Command="{Binding BackCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

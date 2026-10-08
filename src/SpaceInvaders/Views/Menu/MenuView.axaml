@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpaceInvaders.ViewModels"
+             x:Class="SpaceInvaders.Views.Menu.MenuView"
+             x:DataType="vm:MenuViewModel"
+             Classes="retro-screen">
+    <Grid Background="#000000" RowDefinitions="Auto,*,Auto" Margin="48,28">
+        <Grid Grid.Row="0" Width="620" ColumnDefinitions="*,*,*" HorizontalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Classes="retro-heading" Text="PUNTOS&lt;1&gt;" FontSize="14" />
+                <TextBlock Classes="retro-heading" Text="000000" FontSize="19" HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock Classes="retro-green" Text="RÉCORD" FontSize="14" />
+                <TextBlock Classes="retro-heading" Text="{Binding BestScore, StringFormat={}{0:D6}}" FontSize="19" HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock Classes="retro-heading" Text="PUNTOS&lt;2&gt;" FontSize="14" />
+                <TextBlock Classes="retro-heading" Text="000000" FontSize="19" HorizontalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Width="620" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14">
+            <Image Source="avares://SpaceInvaders/Assets/Images/Interface/space-invaders-logo.png"
+                   Width="560" Height="175" Stretch="Uniform" RenderOptions.BitmapInterpolationMode="None" HorizontalAlignment="Center" />
+
+            <TextBlock Classes="retro-green" Text="* DEFENSA ORBITAL *" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,12" />
+
+            <StackPanel Width="340" HorizontalAlignment="Center" Spacing="10">
+                <Button Classes="retro-menu retro-start" Content="[  INICIAR JUEGO  ]" Command="{Binding PlayCommand}" />
+                <Button Classes="retro-menu" Content="[  CONFIGURACIÓN  ]" Command="{Binding ShowSettingsCommand}" />
+                <Button Classes="retro-menu" Content="[  PUNTAJES  ]" Command="{Binding ShowScoresCommand}" />
+                <Button Classes="retro-menu retro-danger" Content="[  SALIR  ]" Command="{Binding ExitCommand}" />
+            </StackPanel>
+
+            <TextBlock Classes="retro-heading" Text="PULSA ESPACIO PARA DISPARAR" FontSize="13" HorizontalAlignment="Center" Margin="0,14,0,0" />
+            <TextBlock Classes="retro-green" Text="© 1978 // SECTOR TIERRA" FontSize="11" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <Grid Grid.Row="2" Width="620" ColumnDefinitions="*,Auto" HorizontalAlignment="Center">
+            <TextBlock Classes="retro-heading" Text="← → / A D  MOVER" FontSize="11" />
+            <TextBlock Grid.Column="1" Classes="retro-heading" Text="CRÉDITO  00" FontSize="12" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpaceInvaders.ViewModels"
+             x:Class="SpaceInvaders.Views.HighScores.HighScoresView"
+             x:DataType="vm:HighScoresViewModel"
+             Classes="retro-screen">
+    <Grid Background="#000000" Margin="70,38" RowDefinitions="Auto,*,Auto">
+        <StackPanel HorizontalAlignment="Center" Spacing="7">
+            <TextBlock Classes="retro-green" Text="* SPACE INVADERS *" FontSize="14" HorizontalAlignment="Center" />
+            <TextBlock Classes="retro-heading" Text="TABLA DE RÉCORDS" FontSize="38" HorizontalAlignment="Center" />
+            <TextBlock Classes="retro-heading" Text="LOS 10 MEJORES DEFENSORES" FontSize="12" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Width="760" HorizontalAlignment="Center" Margin="0,30" RowDefinitions="Auto,*">
+            <Grid ColumnDefinitions="60,*,150,100,140" Margin="10,0,10,10">
+                <TextBlock Classes="retro-green" Text="N.º" />
+                <TextBlock Grid.Column="1" Classes="retro-green" Text="NOMBRE" />
+                <TextBlock Grid.Column="2" Classes="retro-green" Text="PUNTOS" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="3" Classes="retro-green" Text="OLEADA" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="4" Classes="retro-green" Text="FECHA" HorizontalAlignment="Right" />
+            </Grid>
+
+            <Border Grid.Row="1" BorderBrush="#F4FFF4" BorderThickness="1,1,1,0">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Scores}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ScoreRowViewModel">
+                                <Border BorderBrush="#315B36" BorderThickness="0,0,0,1" Padding="10,11">
+                                    <Grid ColumnDefinitions="60,*,150,100,140">
+                                        <TextBlock Classes="retro-heading" Text="{Binding Rank, StringFormat={}{0:D2}}" />
+                                        <TextBlock Grid.Column="1" Classes="retro-heading" Text="{Binding Entry.PlayerName}" />
+                                        <TextBlock Grid.Column="2" Classes="retro-green" Text="{Binding Entry.Score, StringFormat={}{0:D6}}" HorizontalAlignment="Right" />
+                                        <TextBlock Grid.Column="3" Classes="retro-heading" Text="{Binding Entry.Wave, StringFormat={}{0:D2}}" HorizontalAlignment="Right" />
+                                        <TextBlock Grid.Column="4" Classes="retro-heading" Text="{Binding Entry.PlayedAt, StringFormat={}{0:dd/MM/yy}}" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+
+            <TextBlock Grid.Row="1" IsVisible="{Binding IsEmpty}" Classes="retro-heading"
+                       Text="NO HAY PUNTAJES REGISTRADOS" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="1" Text="{Binding ErrorMessage}" Foreground="#FF6868" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        </Grid>
+
+        <Button Grid.Row="2" Classes="retro-menu" Content="[ VOLVER AL MENÚ ]" Command="{Binding BackCommand}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SpaceInvaders.ViewModels"
+             x:Class="SpaceInvaders.Views.GameOver.GameOverView"
+             x:DataType="vm:GameOverViewModel"
+             Classes="retro-screen">
+    <Grid Background="#000000">
+        <StackPanel Width="520" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+            <TextBlock Classes="retro-green" Text="* INVASIÓN COMPLETA *" FontSize="14" HorizontalAlignment="Center" />
+            <TextBlock Classes="retro-heading" Text="FIN DEL JUEGO" Foreground="#FF6868" FontSize="50" HorizontalAlignment="Center" />
+
+            <Grid Width="390" ColumnDefinitions="*,*" Margin="0,8">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Classes="retro-green" Text="PUNTOS" FontSize="13" HorizontalAlignment="Center" />
+                    <TextBlock Classes="retro-heading" Text="{Binding Score, StringFormat={}{0:D6}}" FontSize="27" HorizontalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Classes="retro-green" Text="OLEADA" FontSize="13" HorizontalAlignment="Center" />
+                    <TextBlock Classes="retro-heading" Text="{Binding Wave, StringFormat={}{0:D2}}" FontSize="27" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Classes="retro-heading" Text="ESCRIBE TU NOMBRE" FontSize="15" HorizontalAlignment="Center" Margin="0,8,0,0" />
+            <TextBox Width="340" Text="{Binding PlayerName}" MaxLength="12" PlaceholderText="PILOTO" HorizontalContentAlignment="Center"
+                     FontFamily="Consolas" FontSize="20" Background="#000000" Foreground="#63FF75"
+                     BorderBrush="#F4FFF4" BorderThickness="1" CornerRadius="0" />
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="#FF6868" FontFamily="Consolas" TextWrapping="Wrap" HorizontalAlignment="Center" />
+
+            <Button Classes="retro-menu retro-start" Content="[ GUARDAR PUNTAJE ]" Command="{Binding SaveScoreCommand}" />
+            <Button Classes="retro-menu" Content="[ REINTENTAR ]" Command="{Binding RetryCommand}" />
+            <Button Classes="retro-menu" Content="[ VOLVER AL MENÚ ]" Command="{Binding BackToMenuCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

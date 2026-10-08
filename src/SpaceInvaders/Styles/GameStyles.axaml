@@ -1,0 +1,159 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Window">
+        <Setter Property="Background" Value="#050713" />
+        <Setter Property="FontFamily" Value="avares://Avalonia.Fonts.Inter/Assets#Inter" />
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="#E9F7FF" />
+    </Style>
+
+    <Style Selector="TextBlock.title">
+        <Setter Property="FontSize" Value="54" />
+        <Setter Property="FontWeight" Value="Black" />
+        <Setter Property="Foreground" Value="#42D9FF" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TextBlock.eyebrow">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#8BFF6A" />
+        <Setter Property="LetterSpacing" Value="3" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Padding" Value="24,13" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Background" Value="#11172A" />
+        <Setter Property="Foreground" Value="#E9F7FF" />
+        <Setter Property="BorderBrush" Value="#33405E" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#1B2641" />
+    </Style>
+
+    <Style Selector="Button.primary">
+        <Setter Property="Background" Value="#42D9FF" />
+        <Setter Property="Foreground" Value="#04101A" />
+        <Setter Property="BorderBrush" Value="#9DEEFF" />
+    </Style>
+
+    <Style Selector="Button.danger">
+        <Setter Property="BorderBrush" Value="#FF4B71" />
+        <Setter Property="Foreground" Value="#FF8CA5" />
+    </Style>
+
+    <Style Selector="Button.menu-action">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Padding" Value="24,15" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- Arcade menu language: square geometry, monochrome CRT palette and fixed-width type. -->
+    <Style Selector="UserControl.retro-screen">
+        <Setter Property="Background" Value="#000000" />
+        <Setter Property="FontFamily" Value="Consolas" />
+    </Style>
+
+    <Style Selector="TextBlock.retro-heading">
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#F4FFF4" />
+        <Setter Property="LetterSpacing" Value="3" />
+    </Style>
+
+    <Style Selector="TextBlock.retro-green">
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#63FF75" />
+        <Setter Property="LetterSpacing" Value="2" />
+    </Style>
+
+    <Style Selector="Button.retro-menu">
+        <Setter Property="Width" Value="340" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="18,12" />
+        <Setter Property="Background" Value="#000000" />
+        <Setter Property="Foreground" Value="#F4FFF4" />
+        <Setter Property="BorderBrush" Value="#F4FFF4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="Button.retro-menu:pointerover">
+        <Setter Property="Foreground" Value="#63FF75" />
+        <Setter Property="BorderBrush" Value="#63FF75" />
+        <Setter Property="Background" Value="#000000" />
+    </Style>
+
+    <Style Selector="Button.retro-menu:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#000000" />
+    </Style>
+
+    <Style Selector="Button.retro-start">
+        <Setter Property="Foreground" Value="#63FF75" />
+        <Setter Property="BorderBrush" Value="#63FF75" />
+    </Style>
+
+    <Style Selector="Button.retro-danger">
+        <Setter Property="Foreground" Value="#FF6868" />
+        <Setter Property="BorderBrush" Value="#FF6868" />
+    </Style>
+
+    <Style Selector="Border.retro-panel">
+        <Setter Property="Background" Value="#000000" />
+        <Setter Property="BorderBrush" Value="#F4FFF4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <Style Selector="Button.hud-icon">
+        <Setter Property="Width" Value="48" />
+        <Setter Property="Height" Value="44" />
+        <Setter Property="Padding" Value="9" />
+        <Setter Property="Background" Value="#000000" />
+        <Setter Property="BorderBrush" Value="#F4FFF4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <Style Selector="Button.hud-icon:pointerover">
+        <Setter Property="BorderBrush" Value="#63FF75" />
+        <Setter Property="Background" Value="#071509" />
+    </Style>
+
+    <Style Selector="Button.hud-icon:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#071509" />
+    </Style>
+
+    <Style Selector="Button.hud-exit">
+        <Setter Property="BorderBrush" Value="#FF334F" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="#0A1020" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="BorderBrush" Value="#42D9FF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="14,11" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CornerRadius" Value="3" />
+    </Style>
+
+    <Style Selector="Border.panel">
+        <Setter Property="Background" Value="#0A1020" />
+        <Setter Property="BorderBrush" Value="#202D4A" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+</Styles>
