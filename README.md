@@ -2,6 +2,16 @@
 
 Juego de escritorio construido con C#, .NET 10, Avalonia 12.1 y CommunityToolkit.Mvvm.
 
+## Capturas
+
+### Menú principal
+
+![Menú principal de Space Invaders](docs/images/space-invaders-menu.png)
+
+### Partida
+
+![Partida de Space Invaders](docs/images/space-invaders-gameplay.png)
+
 ## Ejecutar
 
 ```powershell
